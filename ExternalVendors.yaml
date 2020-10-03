@@ -2,12 +2,11 @@ openapi: 3.0.0
 
 info:
   contact:
-    email: crm-team@unicourt.com
     name: TEAM CRM
   description: CWDR-CRM API
   title: RESTful API's for CWDR CRM
   version: 1.0.0
-  termsOfService: 'https://unicourt.com/terms-of-service'
+  termsOfService: 'https://cwdebtrelief.com/terms-of-service'
   license:
     name: Proprietry
 tags:
@@ -19,6 +18,12 @@ servers:
     url: ''
     
   - description: Production Internal Load Balancer 
+    url: ''
+
+  - description: Test 
+    url: ''
+    
+  - description: Test Internal Load Balancer 
     url: ''
 
 paths:
@@ -209,7 +214,6 @@ components:
                   - status
                   - message
                   - data
-                  - apiVersion
                 properties:
                   status:
                     type: string
@@ -220,8 +224,6 @@ components:
                     maxLength: 255
                   data:
                     type: object
-                  apiVersion:
-                    $ref: '#/components/schemas/ApiVersion'
       headers:
         X-Status-Reason:
           description: Bad Request
@@ -284,7 +286,6 @@ components:
               - status
               - message
               - data
-              - apiVersion
             properties:
               status:
                 type: string
@@ -294,8 +295,6 @@ components:
               message:
                 type: string
                 maxLength: 255
-              apiVersion:
-                $ref: '#/components/schemas/ApiVersion'
       headers:
         X-Status-Reason:
           description: Internal Server Error
@@ -388,29 +387,3 @@ components:
       type: string
       format: email
       maxLength: 255
-    ApiVersion:
-      type: object
-      required:
-        - name
-        - major
-        - minor
-        - version
-        - patch
-      properties:
-        name:
-          type: string
-          maxLength: 100
-          example: 'cwdr:api/v1'
-        major:
-          type: number
-          example: 0
-        minor:
-          type: number
-          example: 0
-        patch:
-          type: number
-          example: 1
-        version:
-          type: string
-          example: '0.0.1'
-          maxLength: 16
