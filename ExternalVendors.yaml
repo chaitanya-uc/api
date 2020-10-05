@@ -27,7 +27,7 @@ servers:
     url: ''
 
 paths:
-  /Lead/action/ExternalLeads:
+  /ExternalLeads:
     post:
       tags:
         - Other Leads
@@ -52,9 +52,9 @@ paths:
                     additionalProperties:
                       type: string
                     example:
-                        "5df432bc0338abb7d": "8030001"
-                        "5df432bc0338abb7f": "8030002"
-                        "5df432bc0338abb7g": "8030003"
+                        "string1": "8030001"
+                        "string2": "8030002"
+                        "string3": "8030003"
                   crm_contact_id:
                     type: string
                     maxLength: 24
@@ -108,13 +108,13 @@ components:
               firstName:
                 type: string
                 maxLength: 255
-                example: 'Ananya'
+                example: 'Jhon'
                 nullable: false
               lastName:
                 type: string
                 maxLength: 255
                 nullable: false
-                example: 'Kokala'
+                example: 'Smith'
               emailAddress:
                 $ref: '#/components/schemas/EmailAddress'
               phoneNumber:
