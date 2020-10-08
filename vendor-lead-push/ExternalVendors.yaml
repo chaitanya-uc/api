@@ -27,7 +27,7 @@ servers:
     url: ''
 
 paths:
-  /ExternalLeads:
+  /VendorLead:
     post:
       tags:
         - Other Leads
