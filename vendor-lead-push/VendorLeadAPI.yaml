@@ -3,8 +3,8 @@ openapi: 3.0.0
 info:
   contact:
     name: CWDR Dev Team
-  description: CWDR API
-  title: RESTful API's for CWDR
+  description: RESTful API's to push leads to CountryWide Debt Relief
+  title: CountryWide Debt Relief APIs
   version: 1.0.0
   termsOfService: 'https://cwdebtrelief.com/terms-of-service'
   license:
