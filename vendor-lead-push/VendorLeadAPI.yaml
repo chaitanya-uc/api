@@ -4,7 +4,7 @@ info:
   contact:
     name: CWDR Dev Team
     email: apis@cwdebtrelief.com
-  description: RESTful API's to push leads to CountryWide Debt Relief. Vendors that generate leads for CountryWide will need to contact apis@cwdebtrelief.com and get the URL endpoint to post the leads and a authentication token.
+  description: RESTful API's to push leads to CountryWide Debt Relief. Vendors that generate leads for CountryWide will need to contact apis@cwdebtrelief.com and get the URL endpoint and the auth token to post the leads.
   title: CountryWide Debt Relief APIs
   version: 1.0.0
   termsOfService: 'https://cwdebtrelief.com/terms-of-service'
