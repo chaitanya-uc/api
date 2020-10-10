@@ -2,40 +2,34 @@ openapi: 3.0.0
 
 info:
   contact:
-    name: TEAM CRM
-  description: CWDR-CRM API
-  title: RESTful API's for CWDR CRM
+    name: CWDR Dev Team
+  description: CWDR API
+  title: RESTful API's for CWDR
   version: 1.0.0
   termsOfService: 'https://cwdebtrelief.com/terms-of-service'
   license:
     name: Proprietry
 tags:
-  - name: Other Leads
-    description: Other Lead APIs
+  - name: Vendor Lead API
+    description: API for vendors to push leads to Country Wide Debt Relief
 
 servers:
   - description: Production
     url: ''
-    
-  - description: Production Internal Load Balancer 
-    url: ''
 
-  - description: Test 
-    url: ''
-    
-  - description: Test Internal Load Balancer 
+  - description: Staging 
     url: ''
 
 paths:
   /VendorLead:
     post:
       tags:
-        - Other Leads
+        - Vendor Lead API
       description: |
-        The Leads from the third party vendors.
-      operationId: ExternalLeads
+        API for vendors to push leads to Country Wide Debt Relief
+      operationId: VendorLead
       requestBody:
-        $ref: "#/components/requestBodies/ExternalLeads"
+        $ref: "#/components/requestBodies/VendorLead"
       responses:
         "200":
           description: ok
@@ -90,7 +84,7 @@ components:
         Standard CRM API User auth token
 
   requestBodies:
-    ExternalLeads:
+    VendorLead:
       content:
         application/json:
           schema:
