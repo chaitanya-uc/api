@@ -11,7 +11,7 @@ info:
     name: Proprietry
 tags:
   - name: Vendor Lead API
-    description: API for vendors to push leads to Country Wide Debt Relief
+    description: API for vendors to push leads to CountryWide Debt Relief
 
 servers:
   - description: Production
@@ -26,7 +26,7 @@ paths:
       tags:
         - Vendor Lead API
       description: |
-        API for vendors to push leads to Country Wide Debt Relief
+        API for vendors to push leads to CountryWide Debt Relief
       operationId: VendorLead
       requestBody:
         $ref: "#/components/requestBodies/VendorLead"
