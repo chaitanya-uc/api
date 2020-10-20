@@ -6,10 +6,7 @@ info:
     email: apis@cwdebtrelief.com
   description: |
       RESTful API's to push leads to CountryWide Debt Relief.
-      
-      Vendors that generate leads for CountryWide will need to contact `apis@cwdebtrelief.com`. 
-      
-      And get the **URL Endpoint** and the **API Key** to post the leads.
+      Vendors that generate leads for CountryWide will need to contact `apis@cwdebtrelief.com` to get the **URL Endpoint** and the **API Key**
   title: CountryWide Debt Relief APIs
   version: 1.0.0
   termsOfService: 'https://cwdebtrelief.com/terms-of-service'
@@ -182,7 +179,7 @@ components:
                   
                   HAT : Hawaii-Aleutian Standard Time
               vendorLeadId: 
-                description: SID or PID for the lead.
+                description: ID to uniquely identify the Lead for a vendor.
                 type: string
                 maxLength: 255
                 example: '852d9f51-d5bf-4584-991e-5a79bef69dc1'
