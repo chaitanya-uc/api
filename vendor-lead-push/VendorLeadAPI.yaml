@@ -477,7 +477,7 @@ components:
             - AKT
             - HAT
         vendorLeadId: 
-          description: SID or PID for the lead.
+          description: ID to uniquely identify the Lead for a vendor.
           type: string
           maxLength: 255
           example: '852d9f51-d5bf-4584-991e-5a79bef69dc1'
