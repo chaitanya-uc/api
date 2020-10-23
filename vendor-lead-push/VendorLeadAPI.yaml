@@ -94,13 +94,10 @@ components:
             required: 
               - firstName
               - lastName
-              - addressStreet
-              - addressCity
               - addressState
-              - addressPostalCode
               - debtAmount
-              - timeZone
               - emailAddress
+              - phoneNumber
             properties:
               firstName:
                 type: string
@@ -140,7 +137,6 @@ components:
                 example: '92780'
               debtAmount:
                 type: string
-                format: float
                 nullable : false
                 enum:
                   - '$5,000 - $9,999'
@@ -154,30 +150,6 @@ components:
                   - '$80,000 - $89,999'
                   - '$90,000 - $99,999'
                   - 'More than $100,000'
-              timeZone:
-                type: string
-                enum:
-                  - AST
-                  - EST
-                  - CST
-                  - MST
-                  - PST
-                  - AKT
-                  - HAT
-                description: |
-                  AST : Atlantic Standard Time
-                  
-                  EST : Eastern Standard Time
-                  
-                  CST : Central Standard Time
-                  
-                  MST : Mountain Standard Time
-                  
-                  PST : Pacific Standard Time
-                  
-                  AKT : Alaska Standard Time
-                  
-                  HAT : Hawaii-Aleutian Standard Time
               vendorLeadId: 
                 description: ID to uniquely identify the Lead for a vendor.
                 type: string
