@@ -381,13 +381,10 @@ components:
       required: 
         - firstName
         - lastName
-        - addressStreet
-        - addressCity
         - addressState
-        - addressPostalCode
         - debtAmount
-        - timeZone
         - emailAddress
+        - phoneNumber
       properties:
         firstName:
           type: string
@@ -424,7 +421,6 @@ components:
           example: '92780'
         debtAmount:
           type: string
-          format: float
           nullable : false
           enum:
             - '$5,000 - $9,999'
@@ -438,16 +434,6 @@ components:
             - '$80,000 - $89,999'
             - '$90,000 - $99,999'
             - 'More than $100,000'
-        timeZone:
-          type: string
-          enum:
-            - AST
-            - EST
-            - CST
-            - MST
-            - PST
-            - AKT
-            - HAT
         vendorLeadId: 
           description: SID or PID for the lead.
           type: string
