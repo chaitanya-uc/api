@@ -186,6 +186,18 @@ components:
               utmAdditionalFields:
                 type: object
                 description: Its a json type data. Any additional information regarding the UTM variables.
+              tcpaDisclosure:
+                description: |
+                  - Agree - Consent to receive automatic dialing/texting or prerecorded voice at a particular number.
+                  - Disagree - Opting out to receive automatic dialing/texting or prerecorded voice at a particular number.
+                  - None - Has not indicated preference on TCPA.
+                type: string
+                default: none
+                maxLength: 10
+                enum:
+                  - agree
+                  - disagree
+                  - none
 
   # Response payload
   responses:
@@ -475,3 +487,15 @@ components:
             Campaign Name: ''
             Search Keyword: ''
             Company/Household: ''
+        tcpaDisclosure:
+          description: |
+            - Agree - Consent to receive automatic dialing/texting or prerecorded voice at a particular number.
+            - Disagree - Opting out to receive automatic dialing/texting or prerecorded voice at a particular number.
+            - None - Has not indicated preference on TCPA.
+          type: string
+          default: none
+          maxLength: 10
+          enum:
+            - agree
+            - disagree
+            - none
