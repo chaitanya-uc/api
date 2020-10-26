@@ -446,6 +446,18 @@ components:
             - '$80,000 - $89,999'
             - '$90,000 - $99,999'
             - 'More than $100,000'
+        tcpaDisclosure:
+          description: |
+            - Agree - Consent to receive automatic dialing/texting or prerecorded voice at a particular number.
+            - Disagree - Opting out to receive automatic dialing/texting or prerecorded voice at a particular number.
+            - None - Has not indicated preference on TCPA.
+          type: string
+          default: none
+          maxLength: 10
+          enum:
+            - agree
+            - disagree
+            - none
         vendorLeadId: 
           description: SID or PID for the lead.
           type: string
@@ -487,15 +499,3 @@ components:
             Campaign Name: ''
             Search Keyword: ''
             Company/Household: ''
-        tcpaDisclosure:
-          description: |
-            - Agree - Consent to receive automatic dialing/texting or prerecorded voice at a particular number.
-            - Disagree - Opting out to receive automatic dialing/texting or prerecorded voice at a particular number.
-            - None - Has not indicated preference on TCPA.
-          type: string
-          default: none
-          maxLength: 10
-          enum:
-            - agree
-            - disagree
-            - none
