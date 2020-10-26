@@ -150,6 +150,19 @@ components:
                   - '$80,000 - $89,999'
                   - '$90,000 - $99,999'
                   - 'More than $100,000'
+              tcpaDisclosure:
+                description: |
+                  We require our vendors to accept Telephone Consumer Protection Act (TCPA) disclosure during form submissions.
+                  - Agree - Consent to receive automatic dialing/texting or prerecorded voice at a particular number.
+                  - Disagree - Opting out to receive automatic dialing/texting or prerecorded voice at a particular number.
+                  - None - Set this if you do not provide the TCPA disclosure option to the user on form submissions.
+                type: string
+                default: none
+                maxLength: 10
+                enum:
+                  - agree
+                  - disagree
+                  - none
               vendorLeadId: 
                 description: ID to uniquely identify the Lead for a vendor.
                 type: string
@@ -186,18 +199,6 @@ components:
               utmAdditionalFields:
                 type: object
                 description: Its a json type data. Any additional information regarding the UTM variables.
-              tcpaDisclosure:
-                description: |
-                  - Agree - Consent to receive automatic dialing/texting or prerecorded voice at a particular number.
-                  - Disagree - Opting out to receive automatic dialing/texting or prerecorded voice at a particular number.
-                  - None - Has not indicated preference on TCPA.
-                type: string
-                default: none
-                maxLength: 10
-                enum:
-                  - agree
-                  - disagree
-                  - none
 
   # Response payload
   responses:
@@ -448,9 +449,10 @@ components:
             - 'More than $100,000'
         tcpaDisclosure:
           description: |
+            We require our vendors to accept Telephone Consumer Protection Act (TCPA) disclosure during form submissions.
             - Agree - Consent to receive automatic dialing/texting or prerecorded voice at a particular number.
             - Disagree - Opting out to receive automatic dialing/texting or prerecorded voice at a particular number.
-            - None - Has not indicated preference on TCPA.
+            - None - Set this if you do not provide the TCPA disclosure option to the user on form submissions.
           type: string
           default: none
           maxLength: 10
