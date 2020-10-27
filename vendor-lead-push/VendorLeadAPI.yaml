@@ -98,6 +98,7 @@ components:
               - debtAmount
               - emailAddress
               - phoneNumber
+              - tcpaDisclosure
             properties:
               firstName:
                 type: string
@@ -155,14 +156,12 @@ components:
                   We require our vendors to accept Telephone Consumer Protection Act (TCPA) disclosure during form submissions.
                   - Agree - Consent to receive automatic dialing/texting or prerecorded voice at a particular number.
                   - Disagree - Opting out to receive automatic dialing/texting or prerecorded voice at a particular number.
-                  - None - Set this if you do not provide the TCPA disclosure option to the user on form submissions.
                 type: string
                 default: none
                 maxLength: 10
                 enum:
                   - agree
                   - disagree
-                  - none
               vendorLeadId: 
                 description: ID to uniquely identify the Lead for a vendor.
                 type: string
@@ -398,6 +397,7 @@ components:
         - debtAmount
         - emailAddress
         - phoneNumber
+        - tcpaDisclosure
       properties:
         firstName:
           type: string
@@ -452,14 +452,12 @@ components:
             We require our vendors to accept Telephone Consumer Protection Act (TCPA) disclosure during form submissions.
             - Agree - Consent to receive automatic dialing/texting or prerecorded voice at a particular number.
             - Disagree - Opting out to receive automatic dialing/texting or prerecorded voice at a particular number.
-            - None - Set this if you do not provide the TCPA disclosure option to the user on form submissions.
           type: string
           default: none
           maxLength: 10
           enum:
             - agree
             - disagree
-            - none
         vendorLeadId: 
           description: SID or PID for the lead.
           type: string
