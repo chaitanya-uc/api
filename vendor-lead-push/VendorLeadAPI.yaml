@@ -94,13 +94,11 @@ components:
             required: 
               - firstName
               - lastName
-              - addressStreet
-              - addressCity
               - addressState
-              - addressPostalCode
               - debtAmount
-              - timeZone
               - emailAddress
+              - phoneNumber
+              - tcpaDisclosure
             properties:
               firstName:
                 type: string
@@ -140,7 +138,6 @@ components:
                 example: '92780'
               debtAmount:
                 type: string
-                format: float
                 nullable : false
                 enum:
                   - '$5,000 - $9,999'
@@ -154,30 +151,17 @@ components:
                   - '$80,000 - $89,999'
                   - '$90,000 - $99,999'
                   - 'More than $100,000'
-              timeZone:
-                type: string
-                enum:
-                  - AST
-                  - EST
-                  - CST
-                  - MST
-                  - PST
-                  - AKT
-                  - HAT
+              tcpaDisclosure:
                 description: |
-                  AST : Atlantic Standard Time
-                  
-                  EST : Eastern Standard Time
-                  
-                  CST : Central Standard Time
-                  
-                  MST : Mountain Standard Time
-                  
-                  PST : Pacific Standard Time
-                  
-                  AKT : Alaska Standard Time
-                  
-                  HAT : Hawaii-Aleutian Standard Time
+                  We require our vendors to accept Telephone Consumer Protection Act (TCPA) disclosure during form submissions.
+                  - Agree - Consent to receive automatic dialing/texting or prerecorded voice at a particular number.
+                  - Disagree - Opting out to receive automatic dialing/texting or prerecorded voice at a particular number.
+                type: string
+                default: none
+                maxLength: 10
+                enum:
+                  - agree
+                  - disagree
               vendorLeadId: 
                 description: ID to uniquely identify the Lead for a vendor.
                 type: string
@@ -409,13 +393,11 @@ components:
       required: 
         - firstName
         - lastName
-        - addressStreet
-        - addressCity
         - addressState
-        - addressPostalCode
         - debtAmount
-        - timeZone
         - emailAddress
+        - phoneNumber
+        - tcpaDisclosure
       properties:
         firstName:
           type: string
@@ -452,7 +434,6 @@ components:
           example: '92780'
         debtAmount:
           type: string
-          format: float
           nullable : false
           enum:
             - '$5,000 - $9,999'
@@ -466,16 +447,17 @@ components:
             - '$80,000 - $89,999'
             - '$90,000 - $99,999'
             - 'More than $100,000'
-        timeZone:
+        tcpaDisclosure:
+          description: |
+            We require our vendors to accept Telephone Consumer Protection Act (TCPA) disclosure during form submissions.
+            - Agree - Consent to receive automatic dialing/texting or prerecorded voice at a particular number.
+            - Disagree - Opting out to receive automatic dialing/texting or prerecorded voice at a particular number.
           type: string
+          default: none
+          maxLength: 10
           enum:
-            - AST
-            - EST
-            - CST
-            - MST
-            - PST
-            - AKT
-            - HAT
+            - agree
+            - disagree
         vendorLeadId: 
           description: ID to uniquely identify the Lead for a vendor.
           type: string
