@@ -136,6 +136,19 @@ components:
                 type: string
                 maxLength: 11
                 example: '92780'
+              socialSecurityNumber:
+                nullable: true
+                maxLength: 11
+                pattern: '^[0-9]{3}\-[0-9]{2}\-[0-9]{4}$'
+                example: '111-11-1111'
+                description: The Social Security Number of the lead. Format will be XX-XXX-XXXX
+              dateOfBirth:
+                nullable: true
+                maxLength: 10
+                format: date
+                pattern: '^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$'
+                example: 03/09/1997
+                description: Date of birth of the lead. Format will be MM/DD/YYYY
               debtAmount:
                 type: string
                 nullable : false
@@ -175,6 +188,7 @@ components:
                   Campaign Name: ''
                   Search Keyword: ''
                   Company/Household: ''
+                  SubId: ''
                 description: Its a json type data. If you have any additional details that you need to store under this lead in our system add them here.
               utmSource:
                 type: string
@@ -373,6 +387,7 @@ components:
       description: Failure Reasons
       schema:
         type: string
+   
     Content-Type:
       description: Response Content-Type
       schema:
@@ -404,11 +419,13 @@ components:
           maxLength: 255
           example: 'Jhon'
           nullable: false
+          description: First Name of the Lead.
         lastName:
           type: string
           maxLength: 255
           nullable: false
           example: 'Smith'
+          description: Last Name of the Lead.
         emailAddress:
           $ref: '#/components/schemas/EmailAddress'
         phoneNumber:
@@ -416,6 +433,7 @@ components:
           maxLength: 14
           pattern: '^\([0-9]{3}\)\s[0-9]{3}\-[0-9]{4}$'
           example: '(111) 111-1111'
+          description: Phone Number of the Lead.
         addressStreet:
           type: string
           maxLength: 255
@@ -432,6 +450,19 @@ components:
           type: string
           maxLength: 11
           example: '92780'
+        socialSecurityNumber:
+          nullable: true
+          maxLength: 11
+          pattern: '^[0-9]{3}\-[0-9]{2}\-[0-9]{4}$'
+          example: '111-11-1111'
+          description: The Social Security Number of the lead. Format will be XX-XXX-XXXX
+        dateOfBirth:
+          nullable: true
+          maxLength: 10
+          format: date
+          pattern: '^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$'
+          example: 03/09/1997
+          description: Date of birth of the lead. Format will be MM/DD/YYYY
         debtAmount:
           type: string
           nullable : false
@@ -471,6 +502,8 @@ components:
             Campaign Name: ''
             Search Keyword: ''
             Company/Household: ''
+            SubId: ''
+          description: Its a json type data. If you have any additional details that you need to store under this lead in our system add them here.
         utmSource:
           type: string
           maxLength: 255
