@@ -1,0 +1,637 @@
+openapi: 3.0.0
+
+info:
+  contact:
+    name: CWDR Dev Team
+    email: apis@cwdebtrelief.com
+  description: |
+      RESTful API's to push leads to CountryWide Debt Relief.
+      Vendors that generate leads for CountryWide will need to contact `apis@cwdebtrelief.com` to get the **URL Endpoint** and the **API Key**
+  title: CountryWide Debt Relief APIs
+  version: 1.0.0
+  termsOfService: 'https://cwdebtrelief.com/terms-of-service'
+  license:
+    name: Proprietry
+tags:
+  - name: CWDR Website APIs
+    description: CRM APIs to integrate with CWDR Website
+
+servers:
+  - description: Production
+    url: ''
+
+  - description: Staging 
+    url: ''
+
+paths:
+  /ConvertLead:
+    post:
+      tags:
+        - CWDR Website APIs
+      description: |
+        Verify the lead in CRM and convert the lead to contact and opportunity. Also set the client details.
+      operationId: ConvertLead
+      requestBody:
+        $ref: "#/components/requestBodies/ConvertLead"
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - crm_lead_id
+                  - crm_contact_id
+                  - crm_clientDetail_id
+                  - crm_opportunity
+                properties:
+                  crm_lead_id:
+                    type: string
+                    maxLength: 24
+                  crm_contact_id:
+                    type: string
+                    maxLength: 24
+                  crm_clientDetail_id:
+                    type: string
+                    maxLength: 24
+                  crm_opportunity:
+                    description: List of opportunities of the lead with status.
+                    type: object
+                    additionalProperties:
+                      type: string
+                    example:
+                      "5df432bc0338abb7d": "Open"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+        "502":
+          $ref: '#/components/responses/BadGateway'
+        "503":
+          $ref: '#/components/responses/MaintenanceMode'
+
+# API Key's are defined below
+security:
+  - x_api_key: []
+
+# All $ref are referenced from below here
+components:
+  # API Key's are here
+  securitySchemes:
+    x_api_key:
+      type: apiKey
+      name: X-Api-Key
+      in: header
+      description: >-
+        Standard CRM API User auth token
+
+  requestBodies:
+    ConvertLead:
+      content:
+        application/json:
+          schema:
+            required: 
+              - customerId
+              - snapPackPin
+              - sourceCampaign
+              - utmAdditionalFields
+              - ClientDetails
+              - backEndLink
+            properties:
+              customerId:
+                type: string
+                maxLength: 255
+                nullable: false
+                pattern: '^[0-9]+$'
+                example: '1021000'
+              snapPackPin:
+                type: string
+                maxLength: 3
+                example: ABC
+                pattern: '^[A-Za-z]{3}$'
+                nullable: false
+              mailCountWebsite:
+                type: integer
+                maxLength: 1
+                enum:
+                  - 1
+                  - 2
+                  - 3
+                  - 4
+                example: 1
+              backEndLink:
+                type: string
+                maxLength: 255 
+                pattern: '^(?:([A-Za-z]+):)?(\/{0,3})([0-9\-A-Za-z].+)+(?::(\d+))?(?:\/([^?#]))?(?:\?([^#]))?(?:#(.*))?$'               
+                example: http://cwdebtrelief.com/lp/consumer-advocates
+                nullable: false
+              utmSource:
+                type: string
+                maxLength: 255
+                nullable: true
+                example: 'facebook'
+              utmMedium:
+                type: string
+                nullable: true
+                maxLength: 255
+                enum:
+                  - organic
+                  - cpc 
+                  - email 
+                  - affiliate
+                  - direct
+                  - qr_code
+                  - referral
+              utmCampaign:
+                type: string
+                nullable: true
+                maxLength: 255
+              utmAdditionalFields:
+                type: object
+                required: 
+                  - pageName
+                properties:
+                  pageName:
+                    type: string
+                    nullable: false
+                    maxLength: 255
+                    enum: 
+                      - i_have_received_a_mailing
+                      - lawsuit-email
+                example:
+                  pageName: 'i_have_received_a_mailing'
+              sourceCampaign:
+                type: string
+                maxLength: 255
+                nullable: false
+                enum:
+                  - email
+                  - i received a mailing
+              ClientDetails:
+                type: object
+                required: 
+                  - tcpaDisclosure                 
+                  - phoneNumber
+                  - emailAddress
+                properties:
+                  ucState:
+                    type: string
+                    description: What state do you live in?
+                    maxLength: 2
+                    enum:
+                      - 'AL'
+                      - 'GA'
+                      - 'HI'
+                      - 'ID'
+                      - 'IL'
+                      - 'IN'
+                      - 'IA'
+                      - 'KS'
+                      - 'KY'
+                      - 'LA'
+                      - 'ME'
+                      - 'AK'
+                      - 'MD'
+                      - 'MA'
+                      - 'MI'
+                      - 'MN'
+                      - 'MS'
+                      - 'MO'
+                      - 'MT'
+                      - 'NE'
+                      - 'NV'
+                      - 'NH'
+                      - 'AZ'
+                      - 'NJ'
+                      - 'NM'
+                      - 'NY'
+                      - 'NC'
+                      - 'ND'
+                      - 'OH'
+                      - 'OK'
+                      - 'OR'
+                      - 'PA'
+                      - 'RI'
+                      - 'AR'
+                      - 'SC'
+                      - 'SD'
+                      - 'TN'
+                      - 'TX'
+                      - 'UT'
+                      - 'VT'
+                      - 'VA'
+                      - 'WA'
+                      - 'WV'
+                      - 'WI'
+                      - 'CA'
+                      - 'WY'
+                      - 'DC'
+                      - 'PR'
+                      - 'RC'
+                      - 'CO'
+                      - 'CT'
+                      - 'DE'
+                      - 'FL'
+                      - 'OTHER'
+                    nullable: false                  
+                  phoneNumber:
+                    type: string
+                    maxLength: 14
+                    pattern: '^\([0-9]{3}\)\s[0-9]{3}\-[0-9]{4}$'
+                    example: '(111) 111-1111'
+                  emailAddress:
+                    $ref: '#/components/schemas/EmailAddress'
+                  tcpaDisclosure:
+                    description: |
+                      - Agree - Consent to receive automatic dialing/texting or prerecorded voice at a particular number.
+                      - Disagree - Opting out to receive automatic dialing/texting or prerecorded voice at a particular number.
+                    type: string
+                    maxLength: 10
+                    enum:
+                      - agree
+                      - disagree
+                  bestTimeToCall:
+                    type: string
+                    description: Best Time to contact.
+                    enum:
+                      - 'call now'
+                      - '6 am to 8 am'
+                      - '8 am to 10 am'
+                      - '10 am to noon'
+                      - 'noon to 2 pm'
+                      - '2 pm to 4 pm'
+                      - '4 pm to 6 pm'
+                      - '6 pm to 8 pm'
+                      - 'unsure'
+
+  # Response payload
+  responses:
+    BadRequest:
+      description: Client Side Error, Bad Request
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - type: string
+                nullable: true
+              - type: object
+                required:
+                  - status
+                  - message
+                  - data
+                properties:
+                  status:
+                    type: string
+                    enum:
+                      - BAD_REQUEST
+                  message:
+                    type: string
+                    maxLength: 255
+                  data:
+                    type: object
+      headers:
+        X-Status-Reason:
+          description: Bad Request
+          schema:
+            type: string
+            nullable: true
+          examples:
+            Forbidden:
+              value:
+                X-Status-Reason: ''
+
+    Forbidden:      
+      description: API User is forbidden from making changes to this entry in CRM
+      content:
+        application/json:
+          examples:
+            Forbidden:
+              value: ''
+          schema:
+            type: string
+            nullable: true
+      headers:
+        X-Status-Reason:
+          description: Forbidden
+          schema:
+            type: string
+            nullable: true
+          examples:
+            Forbidden:
+              value:
+                X-Status-Reason: ''
+
+    Unauthorized:
+      description: Authorization Failure
+      content:
+        application/json:
+          examples:
+            Auth Token Not Provided:
+              value: ''
+          schema:
+            type: string
+            nullable: true
+      headers:
+        X-Status-Reason:
+          description: Unauthorized
+          schema:
+            type: string
+            nullable: true
+          examples:
+            Unauthorized:
+              value:
+
+    InternalServerError:
+      description: Requested resource was not found.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - status
+              - message
+              - data
+            properties:
+              status:
+                type: string
+                enum:
+                  - FAILURE
+                  - SUCCESS
+              message:
+                type: string
+                maxLength: 255
+      headers:
+        X-Status-Reason:
+          description: Internal Server Error
+          schema:
+            type: string
+            nullable: true
+            example: Duplicate entries found.
+  
+    NotFound:
+      description: CRM Not Found Response
+      content:
+        application/json:
+          examples:
+            NotFound:
+              value: ''
+          schema:
+            type: string
+            nullable: true
+      headers:
+        X-Status-Reason:
+          description: Record does not exist.
+          schema:
+            type: string
+            nullable: true
+            example: Record does not exist.
+          examples:
+            NotFound:
+              value:
+                X-Status-Reason: Record does not exist.
+  
+    MaintenanceMode:
+      description: CRM is in maintenance mode
+      content:
+        application/json:
+          schema:
+            type: string
+            nullable: true
+          examples:
+            Service Unavailable:
+              value:
+      headers:
+        X-Status-Reason:
+          description: Service Unavailable
+          schema:
+            type: string
+            example: 'Application is in maintenance mode.'
+
+    BadGateway:
+      description: Bad Gateway
+      content:
+        application/json:
+          examples:
+            BadGateway:
+              value: |
+                <html>
+                <head><title>502 Bad Gateway</title></head>
+                <body>
+                <center><h1>502 Bad Gateway</h1></center>
+                <hr><center>nginx/1.15.8</center>
+                </body>
+                </html>
+          schema:
+            type: string
+            nullable: true
+            format: html
+      headers:
+        Content-Type:
+          description: Response content type
+          schema:
+            type: string
+            example: text/html
+
+  # Response Headers
+  headers:
+    X-Status-Reason:
+      description: Failure Reasons
+      schema:
+        type: string
+   
+    Content-Type:
+      description: Response Content-Type
+      schema:
+        type: string
+        enum:
+          - application/json
+          - text/html
+
+  # Models where data is stored and reused
+  schemas:
+    EmailAddress:
+      type: string
+      format: email
+      maxLength: 255
+      
+    ConvertLead:
+      required: 
+        - customerId
+        - snapPackPin
+        - sourceCampaign
+        - utmAdditionalFields
+        - ClientDetails
+        - backEndLink
+      properties:
+        customerId:
+          type: string
+          maxLength: 255
+          nullable: false
+          pattern: '^[0-9]+$'
+          example: '1021000'
+        snapPackPin:
+          type: string
+          maxLength: 3
+          example: ABC
+          pattern: '^[A-Za-z]{3}$'
+          nullable: false
+        mailCountWebsite:
+          type: integer
+          maxLength: 1
+          enum:
+            - 1
+            - 2
+            - 3
+            - 4
+          example: 1
+        backEndLink:
+          type: string
+          maxLength: 255 
+          pattern: '^(?:([A-Za-z]+):)?(\/{0,3})([0-9\-A-Za-z].+)+(?::(\d+))?(?:\/([^?#]))?(?:\?([^#]))?(?:#(.*))?$'               
+          example: http://cwdebtrelief.com/lp/consumer-advocates
+          nullable: false
+        utmSource:
+          type: string
+          maxLength: 255
+          nullable: true
+          example: 'facebook'
+        utmMedium:
+          type: string
+          nullable: true
+          maxLength: 255
+          enum:
+            - organic
+            - cpc 
+            - email 
+            - affiliate
+            - direct
+            - qr_code
+            - referral
+        utmCampaign:
+          type: string
+          nullable: true
+          maxLength: 255
+        utmAdditionalFields:
+          type: object
+          required: 
+            - pageName
+          properties:
+            pageName:
+              type: string
+              nullable: false
+              maxLength: 255
+              enum: 
+                - i_have_received_a_mailing
+                - lawsuit-email
+          example:
+            pageName: 'i_have_received_a_mailing'
+        sourceCampaign:
+          type: string
+          maxLength: 255
+          nullable: false
+          enum:
+            - email
+            - i received a mailing
+        ClientDetails:
+          type: object
+          required: 
+            - tcpaDisclosure                 
+            - phoneNumber
+            - emailAddress
+          properties:
+            ucState:
+              type: string
+              description: What state do you live in?
+              maxLength: 2
+              enum:
+                - 'AL'
+                - 'GA'
+                - 'HI'
+                - 'ID'
+                - 'IL'
+                - 'IN'
+                - 'IA'
+                - 'KS'
+                - 'KY'
+                - 'LA'
+                - 'ME'
+                - 'AK'
+                - 'MD'
+                - 'MA'
+                - 'MI'
+                - 'MN'
+                - 'MS'
+                - 'MO'
+                - 'MT'
+                - 'NE'
+                - 'NV'
+                - 'NH'
+                - 'AZ'
+                - 'NJ'
+                - 'NM'
+                - 'NY'
+                - 'NC'
+                - 'ND'
+                - 'OH'
+                - 'OK'
+                - 'OR'
+                - 'PA'
+                - 'RI'
+                - 'AR'
+                - 'SC'
+                - 'SD'
+                - 'TN'
+                - 'TX'
+                - 'UT'
+                - 'VT'
+                - 'VA'
+                - 'WA'
+                - 'WV'
+                - 'WI'
+                - 'CA'
+                - 'WY'
+                - 'DC'
+                - 'PR'
+                - 'RC'
+                - 'CO'
+                - 'CT'
+                - 'DE'
+                - 'FL'
+                - 'OTHER'
+              nullable: false                  
+            phoneNumber:
+              type: string
+              maxLength: 14
+              pattern: '^\([0-9]{3}\)\s[0-9]{3}\-[0-9]{4}$'
+              example: '(111) 111-1111'
+            emailAddress:
+              $ref: '#/components/schemas/EmailAddress'
+            tcpaDisclosure:
+              description: |
+                - Agree - Consent to receive automatic dialing/texting or prerecorded voice at a particular number.
+                - Disagree - Opting out to receive automatic dialing/texting or prerecorded voice at a particular number.
+              type: string
+              maxLength: 10
+              enum:
+                - agree
+                - disagree
+            bestTimeToCall:
+              type: string
+              description: Best Time to contact.
+              enum:
+                - 'call now'
+                - '6 am to 8 am'
+                - '8 am to 10 am'
+                - '10 am to noon'
+                - 'noon to 2 pm'
+                - '2 pm to 4 pm'
+                - '4 pm to 6 pm'
+                - '6 pm to 8 pm'
+                - 'unsure'
